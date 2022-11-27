@@ -75,6 +75,20 @@ public class MainWindow extends JFrame {
                 plane.setXEdges(new Pair<>(xMin, xMax));
                 plane.setYEdges(new Pair<>(yMin, yMax));
                 pp = p1 = null;
+                boolean dynamicStep = true;
+                double xSize = Math.abs(xMin - xMax);
+                double ySize = Math.abs(yMin - yMax);
+                double shape = xSize*ySize;
+                if(dynamicStep){
+                    int step = (int) Math.log(6/shape);
+                    int w = (int) (200 + 10 * Math.log(6/shape));
+                    m.setMaxIterations(w);
+                    System.out.println("Max iterations= "+ w);
+                }
+                else {
+                    m.setMaxIterations(200);
+                }
+                System.out.println("shape = " + shape);
                 mainPanel.repaint();
             }
         });
